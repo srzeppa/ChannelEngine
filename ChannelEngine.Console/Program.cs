@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System.IO;
 
 namespace ChannelEngine.Console
@@ -13,18 +14,17 @@ namespace ChannelEngine.Console
     {
         public static void Main(string[] args)
         {
-            new HostBuilder()
-               .ConfigureHostConfiguration(configHost =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureHostConfiguration(configHost =>
                {
                    configHost.SetBasePath(Directory.GetCurrentDirectory());
-                   configHost.AddEnvironmentVariables(prefix: "ASPNETCORE_");
                    configHost.AddCommandLine(args);
                })
                .ConfigureAppConfiguration((hostContext, configApp) =>
                {
                    configApp.AddJsonFile("appsettings.json", optional: true);
                })
-               .ConfigureServices((hostContext, services) =>
+                .ConfigureServices((hostContext, services) =>
                {
                    var config = new ConfigurationBuilder()
                      .SetBasePath(Directory.GetCurrentDirectory())
@@ -33,12 +33,18 @@ namespace ChannelEngine.Console
                    services.AddHostedService<ChannelEngineHostedService>();
                    services.AddTransient<IUrlProvider, UrlProvider>();
                    services.AddHttpClient<IChannelEngineClient, ChannelEngineClient>();
-
                    services.AddTransient<ChannelEngineConfiguration>();
+                   services.AddLogging();
                })
-			   .UseConsoleLifetime()
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.ClearProviders();
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConsole();
+                })
+               .UseConsoleLifetime()
                .Build()
-               .Run();
+			   .Run();
         }
     }
 }
