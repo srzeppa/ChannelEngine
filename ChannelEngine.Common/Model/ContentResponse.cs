@@ -7,7 +7,7 @@ namespace ChannelEngine.Common.Model
 	public partial class Content
     {
         [JsonProperty("Content")]
-        public ContentElement[] RootContent { get; set; }
+        public List<ContentElement> RootContent { get; set; }
 
         [JsonProperty("Count")]
         public long Count { get; set; }
