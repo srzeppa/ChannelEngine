@@ -1,5 +1,6 @@
 ﻿using ChannelEngine.Common.Client;
 using ChannelEngine.Common.Configuration;
+using ChannelEngine.Common.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,8 @@ namespace ChannelEngine.Console
                    services.AddTransient<IUrlProvider, UrlProvider>();
                    services.AddHttpClient<IChannelEngineClient, ChannelEngineClient>();
                    services.AddTransient<ChannelEngineConfiguration>();
+                   services.AddTransient<IChannelEngineClient, ChannelEngineClient>();
+                   services.AddTransient<IBestSoldProducts, BestSoldProducts>();
                    services.AddLogging();
                })
                 .ConfigureLogging((hostingContext, logging) =>

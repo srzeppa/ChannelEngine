@@ -1,29 +1,31 @@
-﻿using ChannelEngine.Common.Client;
+﻿using ChannelEngine.Common.Logic;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChannelEngine.Console
 {
-	class ChannelEngineHostedService : IHostedService
+	public class ChannelEngineHostedService : IHostedService
 	{
-		private readonly IChannelEngineClient channelEngineClient;
+		private readonly IBestSoldProducts bestSoldProducts;
 		private readonly ILogger logger;
 
-		public ChannelEngineHostedService(IChannelEngineClient channelEngineClient, ILogger<ChannelEngineHostedService> logger)
+		public ChannelEngineHostedService(IBestSoldProducts bestSoldProducts, ILogger<ChannelEngineHostedService> logger)
 		{
-			this.channelEngineClient = channelEngineClient;
+			this.bestSoldProducts = bestSoldProducts;
 			this.logger = logger;
 		}
 
 		public async Task StartAsync(CancellationToken cancellationToken)
 		{
-			logger.LogInformation(await channelEngineClient.GetAsync());
+			logger.LogInformation(JsonConvert.SerializeObject(await bestSoldProducts.GetBestSoldProductsAsync()));
 		}
 
 		public Task StopAsync(CancellationToken cancellationToken)
 		{
+			logger.LogInformation("Stop ChannelEngineHostedService.");
 			return Task.CompletedTask;
 		}
 	}
