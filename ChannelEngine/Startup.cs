@@ -1,13 +1,11 @@
+using ChannelEngine.Common.Client;
+using ChannelEngine.Common.Configuration;
+using ChannelEngine.Common.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ChannelEngine
 {
@@ -23,6 +21,10 @@ namespace ChannelEngine
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddHttpClient<IChannelEngineClient, ChannelEngineClient>();
+			services.AddTransient<IBestSoldProducts, BestSoldProducts>();
+			services.AddTransient<IUrlProvider, UrlProvider>();
+			services.AddTransient<ChannelEngineConfiguration>();
 			services.AddRazorPages();
 		}
 

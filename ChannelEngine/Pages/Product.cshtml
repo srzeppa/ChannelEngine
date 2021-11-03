@@ -1,0 +1,32 @@
+﻿@page
+@model ChannelEngine.Pages.ProductModel
+@{
+}
+<table class="table" style="text-align: center">
+	<tr>
+		<th>
+			<a>Name</a>
+		</th>
+		<th>
+			<a>EAN</a>
+		</th>
+		<th>
+			<a>Quantity</a>
+		</th>
+	</tr>
+
+	@foreach (var product in Model.Products)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => product.Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => product.EAN)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => product.TotalQuantity)
+			</td>
+		</tr>
+	}
+</table>

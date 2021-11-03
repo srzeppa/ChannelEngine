@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ChannelEngine.Common\ChannelEngine.Common.csproj" />
+  </ItemGroup>
+
 </Project>

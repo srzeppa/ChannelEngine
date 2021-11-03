@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChannelEngine.Business\ChannelEngine.Business.csproj" />
     <ProjectReference Include="..\ChannelEngine.Common\ChannelEngine.Common.csproj" />
   </ItemGroup>
 
