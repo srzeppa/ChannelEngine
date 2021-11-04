@@ -9,10 +9,10 @@ namespace ChannelEngine.Console
 {
 	public class ChannelEngineHostedService : IHostedService
 	{
-		private readonly IBestSoldProducts bestSoldProducts;
+		private readonly IProductService bestSoldProducts;
 		private readonly ILogger logger;
 
-		public ChannelEngineHostedService(IBestSoldProducts bestSoldProducts, ILogger<ChannelEngineHostedService> logger)
+		public ChannelEngineHostedService(IProductService bestSoldProducts, ILogger<ChannelEngineHostedService> logger)
 		{
 			this.bestSoldProducts = bestSoldProducts;
 			this.logger = logger;

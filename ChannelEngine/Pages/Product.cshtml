@@ -1,5 +1,5 @@
 ﻿@page
-@model ChannelEngine.Pages.ProductModel
+@model ProductModel
 @{
 }
 <table class="table" style="text-align: center">
@@ -26,6 +26,11 @@
 			</td>
 			<td>
 				@Html.DisplayFor(modelItem => product.TotalQuantity)
+			</td>
+			<td>
+				<form id="changeStock" method="post" asp-page-handler="ChangeStock">
+					<button type="submit" name="MerchantProductNo" form="changeStock" class="btn btn-danger btn-rounded btn-sm my-0" value="@product.MerchantProductNo">Set stock to 25</button>
+				</form>
 			</td>
 		</tr>
 	}

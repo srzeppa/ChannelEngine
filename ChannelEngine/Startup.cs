@@ -22,7 +22,7 @@ namespace ChannelEngine
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddHttpClient<IChannelEngineClient, ChannelEngineClient>();
-			services.AddTransient<IBestSoldProducts, BestSoldProducts>();
+			services.AddTransient<IProductService, ProductService>();
 			services.AddTransient<IUrlProvider, UrlProvider>();
 			services.AddTransient<ChannelEngineConfiguration>();
 			services.AddRazorPages();

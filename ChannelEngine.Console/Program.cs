@@ -36,7 +36,7 @@ namespace ChannelEngine.Console
                    services.AddHttpClient<IChannelEngineClient, ChannelEngineClient>();
                    services.AddTransient<ChannelEngineConfiguration>();
                    services.AddTransient<IChannelEngineClient, ChannelEngineClient>();
-                   services.AddTransient<IBestSoldProducts, BestSoldProducts>();
+                   services.AddTransient<IProductService, ProductService>();
                    services.AddLogging();
                })
                 .ConfigureLogging((hostingContext, logging) =>

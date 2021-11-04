@@ -4,7 +4,8 @@ namespace ChannelEngine.Common.Client
 {
 	public interface IUrlProvider
 	{
-		string GetOrderUri(string orderStatus);
+		string GetOrderByOrderStatusUri(string orderStatus);
+		string UpdateProductStockUri();
 	}
 
 	public class UrlProvider : IUrlProvider
@@ -16,9 +17,14 @@ namespace ChannelEngine.Common.Client
 			this.channelEngineConfiguration = channelEngineConfiguration;
 		}
 
-		public string GetOrderUri(string orderStatus)
+		public string GetOrderByOrderStatusUri(string orderStatus)
 		{
 			return string.Format(channelEngineConfiguration.OrdersEndpoint, orderStatus, channelEngineConfiguration.ApiKey);
+		}
+
+		public string UpdateProductStockUri()
+		{
+			return string.Format(channelEngineConfiguration.UpdateProductStockEndpoint, channelEngineConfiguration.ApiKey);
 		}
 	}
 }

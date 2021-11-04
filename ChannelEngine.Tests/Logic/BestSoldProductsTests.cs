@@ -14,7 +14,7 @@ namespace ChannelEngine.Tests.Logic
 	public class When_you_get_top_5_products
 	{
 		private Mock<IChannelEngineClient> channelEngineClientMock;
-		private BestSoldProducts sut;
+		private ProductService sut;
 
 		[SetUp]
 		public void SetUp()
@@ -98,7 +98,7 @@ namespace ChannelEngine.Tests.Logic
 					},
 				}
 			});
-			sut = new BestSoldProducts(channelEngineClientMock.Object);
+			sut = new ProductService(channelEngineClientMock.Object);
 		}
 
 		[Test]
